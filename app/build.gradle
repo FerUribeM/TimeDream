@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.ferbajoo.timedream"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation supportDependencies.appCompat
+    implementation supportDependencies.supportLibrary
+    implementation supportDependencies.recyclerView
+    implementation supportDependencies.cardView
+    implementation supportDependencies.design
+
+    implementation reactivexDependencies.rxAndroid
+    implementation reactivexDependencies.rxKotlin
+
+
+    implementation rxBindingDependencies.rxBinding
+    implementation rxBindingDependencies.rxBindingDesing
+    implementation rxBindingDependencies.rxBindingKotlin
+
+    kapt bindingCompile
+
+    kapt roomDependencies.compiler
+    implementation roomDependencies.runtime
+    implementation roomDependencies.rxjava2
+
+
+    testImplementation testDependencies.roboelectric
+    testImplementation testDependencies.kotlin_stdlib
+    testImplementation testDependencies.kotlin_junit
+    testImplementation testDependencies.kotlin_kluent
+
+
+    implementation lifecycleDependencies.extensions
+    implementation lifecycleDependencies.viewmodel
+
+    implementation constraint
+
+    implementation floatinActionLibrary
+
+    testImplementation junitLibrary
+
+    testImplementation mockitoLibrary
+
+    androidTestImplementation testDependencies.runner
+    androidTestImplementation testDependencies.espressoCore
+
+}

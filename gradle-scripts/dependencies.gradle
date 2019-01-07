@@ -1,0 +1,93 @@
+ext{
+
+    test_runner = "1.0.2"
+    espresso = "3.0.2"
+    floatingactionVersion = "1.10.1"
+    mockitoVersion = "1.5.0"
+    rxAndroidVersion = "2.0.2"
+    roboelectricVersion = "3.8"
+    rxKotlinVersion = "2.0.2"
+    rxbindingVersion = "2.1.1"
+    roomVersion = "1.1.1"
+    rxbindingKotlinVersion = "2.0.0"
+    kotlin_stlibVersion = "1.2.60"
+    kotlin_junitVersion = "1.2.50"
+    kotlin_kluentVersion = "1.14"
+    supportVersion = "27.1.1"
+    constraintVersion = "1.1.2"
+    bindingVersion = "2.3.1"
+    junitVersion = "4.12"
+    lifecycleVersion = "1.1.0"
+
+    floationactionPackage = "com.getbase"
+    lifecyclePackage = "android.arch.lifecycle"
+    jUnitPackage = "junit"
+    mockitoPackage = "com.nhaarman"
+    bindingPackage = "com.android.databinding"
+    supportPackage = "com.android.support"
+    supportTestPackage = "com.android.support.test"
+    supportEspressoPackage = "com.android.support.test.espresso"
+    roboelectricPackage = "org.robolectric"
+    kotlin_stlib_junitPackage = "org.jetbrains.kotlin"
+    kotlin_kluentPackage = "org.amshove.kluent"
+    constraintPackage = "com.android.support.constraint"
+    rxbinding2Package = "com.jakewharton.rxbinding2"
+    roomPackage = "android.arch.persistence.room"
+    reactivexPackage = "io.reactivex.rxjava2"
+
+
+    testDependencies = [
+            runner : buildDependency(supportTestPackage, 'runner', test_runner),
+            espressoCore : buildDependency(supportEspressoPackage, 'espresso-core', espresso),
+            roboelectric : buildDependency(roboelectricPackage, 'robolectric', roboelectricVersion),
+            kotlin_stdlib : buildDependency(kotlin_stlib_junitPackage, 'kotlin-stdlib', kotlin_stlibVersion),
+            kotlin_junit : buildDependency(kotlin_stlib_junitPackage, 'kotlin-test-junit', kotlin_junitVersion),
+            kotlin_kluent : buildDependency(kotlin_kluentPackage, 'kluent', kotlin_kluentVersion)
+    ]
+
+    reactivexDependencies = [
+            rxAndroid: buildDependency(reactivexPackage, 'rxandroid', rxAndroidVersion),
+            rxKotlin : buildDependency(reactivexPackage, 'rxkotlin', rxKotlinVersion)
+    ]
+
+    lifecycleDependencies = [
+            extensions : buildDependency(lifecyclePackage, 'extensions', lifecycleVersion),
+            viewmodel : buildDependency(lifecyclePackage, 'viewmodel', lifecycleVersion)
+    ]
+
+    rxBindingDependencies = [
+            rxBinding      : buildDependency(rxbinding2Package, 'rxbinding', rxbindingVersion),
+            rxBindingDesing: buildDependency(rxbinding2Package, 'rxbinding-design', rxbindingVersion),
+            rxBindingKotlin: buildDependency(rxbinding2Package, 'rxbinding-kotlin', rxbindingKotlinVersion)
+    ]
+
+    supportDependencies = [
+            supportLibrary: buildDependency(supportPackage, 'support-v4', supportVersion),
+            appCompat     : buildDependency(supportPackage, 'appcompat-v7', supportVersion),
+            design        : buildDependency(supportPackage, 'design', supportVersion),
+            recyclerView  : buildDependency(supportPackage, 'recyclerview-v7', supportVersion),
+            cardView      : buildDependency(supportPackage, 'cardview-v7', supportVersion)
+    ]
+
+    roomDependencies = [
+            runtime : buildDependency(roomPackage, 'runtime', roomVersion),
+            rxjava2 : buildDependency(roomPackage, 'rxjava2', roomVersion),
+            compiler: buildDependency(roomPackage, 'compiler', roomVersion)
+    ]
+
+
+    constraint = buildDependency(constraintPackage, 'constraint-layout', constraintVersion)
+
+    bindingCompile = buildDependency(bindingPackage, 'compiler', bindingVersion)
+
+    mockitoLibrary = buildDependency(mockitoPackage, 'mockito-kotlin', mockitoVersion)
+
+    junitLibrary = buildDependency(jUnitPackage, 'junit', junitVersion)
+
+    floatinActionLibrary = buildDependency(floationactionPackage, 'floatingactionbutton', floatingactionVersion)
+
+}
+
+static String buildDependency(String pack, String dependency, String version) {
+    return "${pack}:${dependency}:${version}"
+}

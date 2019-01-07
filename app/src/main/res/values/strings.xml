@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Time to dream</string>
+    <string name="remove_five_minuts">Quitar 5 minutos</string>
+    <string name="add_five_minuts">Agregar 5 minutos</string>
+    <string name="start_or_stop_time">Iniciar o detener el tiempo</string>
+    <string name="about">Acerca de</string>
+    <string name="time_reset">Reiniciar el tiempo</string>
+</resources>
