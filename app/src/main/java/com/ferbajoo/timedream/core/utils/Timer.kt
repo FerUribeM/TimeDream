@@ -22,7 +22,6 @@ class Timer(milis : Long,private val iTime : ITimerListener) : CountDownTimer(mi
     }
 
     override fun onTick(milis : Long) {
-        Log.e("Mensaje", "Es $milis")
         this.milisUntilFinished = milis
         iTime.onTickEvent(milis)
     }
