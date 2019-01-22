@@ -1,16 +1,18 @@
 package com.ferbajoo.timedream.ui.app.service
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.os.CountDownTimer
-import android.util.Log
+import com.ferbajoo.timedream.core.utils.SoundManager
+import com.ferbajoo.timedream.core.utils.Timer
+import com.ferbajoo.timedream.core.utils.interfaces.ITimerListener
 import com.ferbajoo.timedream.ui.app.datasource.AppSharedPreferences
 
-class CountDownTimeTask(private val context: Context) : BaseRunnable() {
+class CountDownTimeTask(private val context: Context) : BaseRunnable(), ITimerListener {
 
-    private var preferences : AppSharedPreferences? = null
+    private var preferences: AppSharedPreferences? = null
 
-    private var timer : CountDownTimer? = null
+    private var timer: Timer? = null
 
     companion object {
         const val COUNTDOWNSERVICE = "ferbajoo.countdown_service"
@@ -21,24 +23,37 @@ class CountDownTimeTask(private val context: Context) : BaseRunnable() {
 
         preferences = AppSharedPreferences(context)
 
-        startTime()
+        startTime(preferences!!.currentTime)
     }
 
-    private fun startTime() {
-        timer = object : CountDownTimer(preferences!!.currentTime, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                context.sendBroadcast(createIntentTime(millisUntilFinished))
-            }
+    private fun startTime(milis: Long) {
+        timer = Timer(milis, this)
+        timer?.start()
+    }
 
-            override fun onFinish() {
-                context.sendBroadcast(createIntentFinish())
-                setIsRunning(false)
-            }
+    fun updateTimer(less: Boolean = false) {
+        if (timer != null) {
+            val milis = if (less) (timer?.getMilisUntilFinished()
+                    ?: 0L) - Timer.minutes else (timer?.getMilisUntilFinished()
+                    ?: 0L) + Timer.minutes
+
+            timer?.cancel()
+            timer = null
+
+            startTime(milis)
+        } else {
+            startTime(preferences!!.currentTime)
         }
-        timer!!.start()
     }
 
+    override fun onTickEvent(milis: Long) {
+        context.sendBroadcast(createIntentTime(milis))
+    }
 
+    override fun onFinishEvent() {
+        SoundManager(context as Application).lowerSound()
+        setIsRunning(false)
+    }
 
     fun cancelTimer() {
         timer?.cancel()
@@ -47,10 +62,5 @@ class CountDownTimeTask(private val context: Context) : BaseRunnable() {
     private fun createIntentTime(millisUntilFinished: Long): Intent {
         return Intent(COUNTDOWNSERVICE).putExtra("millisUntilFinished", millisUntilFinished)
     }
-
-    private fun createIntentFinish(): Intent {
-        return Intent(COUNTDOWNSERVICE).putExtra("finish_time", true)
-    }
-
 
 }

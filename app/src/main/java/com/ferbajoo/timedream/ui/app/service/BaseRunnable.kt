@@ -4,7 +4,7 @@ abstract class BaseRunnable : Runnable{
 
     @Volatile var mIsRunning = false
 
-    fun getStartTime() = 1000
+    fun getStartTime() = 1000L
 
     fun isRunning() = mIsRunning
 
