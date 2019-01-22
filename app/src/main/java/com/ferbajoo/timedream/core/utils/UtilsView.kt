@@ -3,13 +3,15 @@ package com.ferbajoo.timedream.core.utils
 import android.content.Context
 import android.content.res.Resources
 import android.support.v4.content.ContextCompat
-import android.util.Log.e
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.ferbajoo.timedream.core.custom_views.CircularSeekBar
+import com.jakewharton.rxbinding2.view.RxView
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
 fun convertDpToPixel(r: Resources, dp: Float): Float {
     val metrics = r.displayMetrics
@@ -47,4 +49,8 @@ fun CircularSeekBar.onProgressChanged(cb: (Int) -> Unit) {
         override fun onStartTrackingTouch(seekBar: CircularSeekBar) {}
         override fun onStopTrackingTouch(seekBar: CircularSeekBar) {}
     })
+}
+
+fun View.addThrotle() : Observable<Any> {
+    return RxView.clicks(this).throttleFirst(2, TimeUnit.SECONDS)
 }

@@ -55,10 +55,6 @@ class CountDownTimeTask(private val context: Context) : BaseRunnable(), ITimerLi
         setIsRunning(false)
     }
 
-    fun cancelTimer() {
-        timer?.cancel()
-    }
-
     private fun createIntentTime(millisUntilFinished: Long): Intent {
         return Intent(COUNTDOWNSERVICE).putExtra("millisUntilFinished", millisUntilFinished)
     }

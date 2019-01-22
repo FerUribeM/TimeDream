@@ -52,6 +52,7 @@ class MainActivity : BaseActivity() {
 
     private fun updateTimer(intent: Intent) {
         viewModel!!.formaterTime(intent.getLongExtra("millisUntilFinished", 0))
+        lockedViews()
     }
 
     override fun onResume() {
@@ -74,11 +75,11 @@ class MainActivity : BaseActivity() {
 
         setupViewModel()
 
-        RxView.clicks(ib_play).subscribe(this::startClick).addTo(subscriptions)
-        RxView.clicks(btn_reset).subscribe(this::resetClick).addTo(subscriptions)
+        ib_play.addThrotle().subscribe(this::startClick).addTo(subscriptions)
+        btn_reset.addThrotle().subscribe(this::resetClick).addTo(subscriptions)
 
-        RxView.clicks(less_minutes).throttleFirst(1, TimeUnit.SECONDS).subscribe(this::lessMinutes).addTo(subscriptions)
-        RxView.clicks(more_minutes).throttleFirst(1, TimeUnit.SECONDS).subscribe(this::moreMinutes).addTo(subscriptions)
+        less_minutes.addThrotle().subscribe(this::lessMinutes).addTo(subscriptions)
+        more_minutes.addThrotle().throttleFirst(1, TimeUnit.SECONDS).subscribe(this::moreMinutes).addTo(subscriptions)
 
         croller_view.onProgressChanged { viewModel!!.setTime(it) }
 
@@ -163,6 +164,17 @@ class MainActivity : BaseActivity() {
         croller_view.isEnabled = true
         btn_reset.isEnabled = true
         viewModel?.setTime(0)
+    }
+
+    private fun lockedViews(){
+        if (croller_view.isEnabled){
+            val image = AnimatedVectorDrawableCompat.create(this, R.drawable.pause_play)
+            ib_play.setImageDrawable(image)
+            image?.start()
+            croller_view.tag = TimerAction.PLAY
+            croller_view.isEnabled = false
+            btn_reset.isEnabled = false
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

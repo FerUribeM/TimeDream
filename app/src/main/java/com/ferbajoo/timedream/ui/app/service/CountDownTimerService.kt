@@ -47,7 +47,6 @@ class CountDownTimerService : Service() {
     }
 
     override fun onDestroy() {
-        (mActualTask as CountDownTimeTask).cancelTimer()
         stopForeground(true)
         super.onDestroy()
     }
