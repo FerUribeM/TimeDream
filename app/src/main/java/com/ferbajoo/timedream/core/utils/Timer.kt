@@ -2,6 +2,7 @@ package com.ferbajoo.timedream.core.utils
 
 import android.os.CountDownTimer
 import android.util.Log
+import android.util.Log.e
 import com.ferbajoo.timedream.core.utils.interfaces.ITimerListener
 import java.util.concurrent.TimeUnit
 
@@ -23,6 +24,7 @@ class Timer(milis : Long,private val iTime : ITimerListener) : CountDownTimer(mi
 
     override fun onTick(milis : Long) {
         this.milisUntilFinished = milis
+        e("Timer","Es $milis")
         iTime.onTickEvent(milis)
     }
 
