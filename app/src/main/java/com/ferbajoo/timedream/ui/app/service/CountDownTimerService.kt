@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Handler
 import com.ferbajoo.timedream.core.utils.NotificationHelper
 import com.ferbajoo.timedream.core.utils.START_TIME
+import com.ferbajoo.timedream.core.utils.STOP_TIME
 
 
 class CountDownTimerService : Service() {
@@ -25,15 +26,21 @@ class CountDownTimerService : Service() {
             START_TIME -> {
                 mActualTask = CountDownTimeTask(applicationContext)
             }
-            else -> {
+            STOP_TIME -> {
                 stopSelf()
                 return START_NOT_STICKY
             }
+            else -> {
+                if (mActualTask != null && mActualTask?.isRunning() == true) {
+                    (mActualTask as CountDownTimeTask).updateTimer(intent.getBooleanExtra("action", false))
+                    return mReturnState
+                }
+            }
         }
 
-        NotificationHelper().createNotification(this,"Time Dream","Hora de dormir...")
+        NotificationHelper().createNotification(this, "Time Dream", "Hora de dormir...")
 
-        Handler().postDelayed(mActualTask, mActualTask!!.getStartTime().toLong())
+        Handler().postDelayed(mActualTask, mActualTask!!.getStartTime())
         mReturnState = START_STICKY
 
         return mReturnState

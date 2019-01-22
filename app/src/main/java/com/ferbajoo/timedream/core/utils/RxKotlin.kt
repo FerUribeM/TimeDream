@@ -24,5 +24,4 @@ fun View.addThrottle(): Observable<Any> {
 private val ACTION_NOTIFICATION = "CountDownTimer"
 
 val START_TIME = 1
-
 val STOP_TIME = 2
