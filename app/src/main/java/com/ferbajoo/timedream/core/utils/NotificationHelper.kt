@@ -2,9 +2,6 @@ package com.ferbajoo.timedream.core.utils
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context.NOTIFICATION_SERVICE
-import android.provider.Settings.System.DEFAULT_NOTIFICATION_URI
-import com.ferbajoo.timedream.R.mipmap.ic_launcher
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -32,7 +29,7 @@ class NotificationHelper {
                 PendingIntent.FLAG_UPDATE_CURRENT)
 
         mBuilder = NotificationCompat.Builder(mContext)
-        mBuilder!!.setSmallIcon(R.mipmap.ic_launcher)
+        mBuilder!!.setSmallIcon(R.drawable.ic_cloud_black)
         mBuilder!!.setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(false)

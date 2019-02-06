@@ -38,7 +38,7 @@ class CountDownTimerService : Service() {
             }
         }
 
-        NotificationHelper().createNotification(this, "Time Dream", "Hora de dormir...")
+        NotificationHelper().createNotification(this, "Time Dream", "Hora de dormir, dulces sueños...")
 
         Handler().postDelayed(mActualTask, mActualTask!!.getStartTime())
         mReturnState = START_STICKY

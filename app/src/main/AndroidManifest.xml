@@ -3,7 +3,7 @@
     package="com.ferbajoo.timedream">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,11 +14,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity android:name=".core.base.BaseActivity" />
 
-        <service android:name=".ui.app.service.CountDownTimerService"/>
+        <service android:name=".ui.app.service.CountDownTimerService" />
 
     </application>
 
