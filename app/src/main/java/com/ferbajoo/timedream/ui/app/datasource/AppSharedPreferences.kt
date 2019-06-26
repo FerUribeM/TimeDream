@@ -13,4 +13,8 @@ open class AppSharedPreferences(context: Context) {
         get() = prefer.getLong("currentTime", 0)
         set(value) = prefer.edit().putLong("currentTime", value).apply()
 
+    var callPlayer: Boolean
+        get() = prefer.getBoolean("callPlayer", false)
+        set(value) = prefer.edit().putBoolean("callPlayer", value).apply()
+
 }

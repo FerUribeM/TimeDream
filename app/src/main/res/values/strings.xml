@@ -5,4 +5,10 @@
     <string name="start_or_stop_time">Iniciar o detener el tiempo</string>
     <string name="about">Acerca de</string>
     <string name="time_reset">Reiniciar el tiempo</string>
+    <string name="reset_time_label">00:00</string>
+    <string name="time_zero_label">00</string>
+    <string name="comenzar_y_reproducir">Comenzar y reproducir</string>
+    <string name="time_dream_label">Time Dream 1.0</string>
+    <string name="name_programmer">Fernando Uribe</string>
+    <string name="email_programmer"><u>fernandurib@gmail.com</u></string>
 </resources>

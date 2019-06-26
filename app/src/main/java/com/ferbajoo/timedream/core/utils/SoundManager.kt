@@ -49,7 +49,7 @@ class SoundManager(private val applicationContext: Application) {
         } else {
             audioManager.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
         }
-
+        applicationContext.removeAllNotifications()
         applicationContext.sendBroadcast(createIntentFinish())
     }
 

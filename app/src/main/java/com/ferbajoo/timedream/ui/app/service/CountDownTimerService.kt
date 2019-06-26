@@ -13,13 +13,13 @@ class CountDownTimerService : Service() {
     private val TASK_NONE = -1
     /** Must no be 0  */
     private var mActualTask: BaseRunnable? = null
-    private var mReturnState = Service.START_NOT_STICKY
+    private var mReturnState = START_NOT_STICKY
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         var task_id = TASK_NONE
 
-        if (intent!!.extras != null) {
-            task_id = intent.extras!!.getInt("type", -1)
+        if (intent?.extras != null) {
+            task_id = intent.extras?.getInt("type", -1) ?: -1
         }
 
         when (task_id) {
@@ -27,20 +27,24 @@ class CountDownTimerService : Service() {
                 mActualTask = CountDownTimeTask(applicationContext)
             }
             STOP_TIME -> {
+                if (mActualTask != null) {
+                    (mActualTask as CountDownTimeTask).stopTime()
+                    mActualTask = null
+                }
                 stopSelf()
                 return START_NOT_STICKY
             }
             else -> {
                 if (mActualTask != null && mActualTask?.isRunning() == true) {
-                    (mActualTask as CountDownTimeTask).updateTimer(intent.getBooleanExtra("action", false))
-                    return mReturnState
+                    (mActualTask as CountDownTimeTask).updateTimer(intent?.getBooleanExtra("action", false) ?: false)
                 }
+                return mReturnState
             }
         }
 
         NotificationHelper().createNotification(this, "Time Dream", "Hora de dormir, dulces sueños...")
 
-        Handler().postDelayed(mActualTask, mActualTask!!.getStartTime())
+        Handler().postDelayed(mActualTask, mActualTask?.getStartTime() ?: 0L)
         mReturnState = START_STICKY
 
         return mReturnState

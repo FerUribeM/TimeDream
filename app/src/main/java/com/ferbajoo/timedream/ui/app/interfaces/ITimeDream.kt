@@ -17,4 +17,10 @@ interface ITimeDream {
     fun getSeconds() : MutableLiveData<String>
 
     fun saveTime()
+
+    fun haveTime() : Boolean
+
+    fun callPlayer(checked: Boolean)
+
+    fun getSettingPlayer() : Boolean
 }

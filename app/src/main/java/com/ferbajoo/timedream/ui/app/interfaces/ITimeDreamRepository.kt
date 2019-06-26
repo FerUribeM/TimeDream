@@ -7,4 +7,8 @@ interface ITimeDreamRepository {
     fun saveTime(time : Long)
 
     fun cleanTime()
+
+    fun callPlayer(checked: Boolean)
+
+    fun getSettingPlayer() : Boolean
 }

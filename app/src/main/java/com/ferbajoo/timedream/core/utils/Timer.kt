@@ -24,7 +24,6 @@ class Timer(milis : Long,private val iTime : ITimerListener) : CountDownTimer(mi
 
     override fun onTick(milis : Long) {
         this.milisUntilFinished = milis
-        e("Timer","Es $milis")
         iTime.onTickEvent(milis)
     }
 

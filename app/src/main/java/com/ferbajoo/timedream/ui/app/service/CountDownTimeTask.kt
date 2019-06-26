@@ -26,6 +26,12 @@ class CountDownTimeTask(private val context: Context) : BaseRunnable(), ITimerLi
         startTime(preferences!!.currentTime)
     }
 
+    fun stopTime(){
+        preferences?.currentTime = 0L
+        timer?.cancel()
+        timer = null
+    }
+
     private fun startTime(milis: Long) {
         timer = Timer(milis, this)
         timer?.start()

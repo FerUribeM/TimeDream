@@ -17,4 +17,12 @@ class TimeDreamRepository(private val appSharedPreferences: AppSharedPreferences
         return appSharedPreferences.currentTime
     }
 
+    override fun callPlayer(checked: Boolean) {
+        appSharedPreferences.callPlayer = checked
+    }
+
+    override fun getSettingPlayer(): Boolean {
+        return appSharedPreferences.callPlayer
+    }
+
 }

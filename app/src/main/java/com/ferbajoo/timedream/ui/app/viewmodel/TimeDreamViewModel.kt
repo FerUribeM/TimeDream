@@ -21,21 +21,21 @@ class TimeDreamViewModel(private val repository: TimeDreamRepository) : ViewMode
         formaterTime(getTimeToLong())
     }
 
-    override fun formaterTime(time_current : Long) {
+    override fun formaterTime(time_current: Long) {
         time.value = hmsTimeFormatter(time_current)
         seconds.value = secoundTimeFormatter(time_current)
     }
 
     override fun moreTime() {
-        if (!isMax()){
-            this.minutes.value = this.minutes.value!! + 5
+        if (!isMax()) {
+            this.minutes.value = (this.minutes.value ?: 0) + 5
             time.value = hmsTimeFormatter(getTimeToLong())
         }
     }
 
     override fun lessTime() {
-        if (!isMin()){
-            this.minutes.value = this.minutes.value!! - 5
+        if (!isMin()) {
+            this.minutes.value = (this.minutes.value ?: 0) - 5
             time.value = hmsTimeFormatter(getTimeToLong())
         }
     }
@@ -48,12 +48,22 @@ class TimeDreamViewModel(private val repository: TimeDreamRepository) : ViewMode
         repository.saveTime(getTimeToLong())
     }
 
-    private fun isMax() = ((this.minutes.value!! + 5) > 720)
+    override fun haveTime() = (this.minutes.value ?: 0) > 0
 
-    private fun isMin() = (this.minutes.value!! - 5) < 0
+    private fun isMax() = (((this.minutes.value ?: 0) + 5) > 720)
+
+    private fun isMin() = ((this.minutes.value ?: 0) - 5) < 0
 
     override fun getSeconds() = seconds
 
     override fun getTime() = time
+
+    override fun callPlayer(checked: Boolean) {
+        repository.callPlayer(checked)
+    }
+
+    override fun getSettingPlayer(): Boolean {
+        return repository.getSettingPlayer()
+    }
 
 }

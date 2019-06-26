@@ -3,8 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:icon="@drawable/ic_more"
+        android:id="@+id/menu_about"
         android:title="@string/about"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_play"
+        android:title="@string/comenzar_y_reproducir"
+        app:actionViewClass="android.widget.CheckBox"
+        app:showAsAction="never"
+        android:checkable="true"/>
 
 </menu>
