@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -43,8 +45,6 @@ dependencies {
     implementation rxBindingDependencies.rxBinding
     implementation rxBindingDependencies.rxBindingDesing
     implementation rxBindingDependencies.rxBindingKotlin
-
-    kapt bindingCompile
 
     kapt roomDependencies.compiler
     implementation roomDependencies.runtime
